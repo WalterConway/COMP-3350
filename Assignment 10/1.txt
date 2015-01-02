@@ -1,0 +1,43 @@
+TITLE LETTER GRADE LOOKUP
+INCLUDE Irvine32.inc
+.data
+INPUTMSG BYTE "Enter your score(0 - 100): ",0
+OUTPUT BYTE " IS THE LETTER GRADE:",0
+OUTPUT1 BYTE "A",0
+OUTPUT2 BYTE "B",0
+OUTPUT3 BYTE "C",0
+OUTPUT4 BYTE "D",0
+OUTPUT5 BYTE "F",0
+.code
+main PROC
+mov edx, OFFSET INPUTMSG
+call WriteString
+call ReadDec
+
+mov edx, OFFSET OUTPUT1
+cmp eax, 89
+jae LBX
+mov edx, OFFSET OUTPUT2
+cmp eax, 79
+jae LBX
+mov edx, OFFSET OUTPUT3
+cmp eax, 69
+jae LBX
+mov edx, OFFSET OUTPUT4
+cmp eax, 59
+jae LBX
+mov edx, OFFSET OUTPUT5
+cmp eax, 0
+jae LBX
+LBX:
+push edx
+call Crlf
+call WriteDec
+mov edx, OFFSET OUTPUT
+call WriteString
+pop edx
+call WriteString
+call Crlf
+exit
+main ENDP
+END main

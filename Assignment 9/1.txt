@@ -1,0 +1,67 @@
+TITLE ARRAYFILL
+INCLUDE Irvine32.inc
+
+.data
+count = 10
+;A0=3
+;A1=6
+;geometricArray WORD 3,6,12,24,48,96,192,384,768,1536
+geometricArray WORD 3 , 9 DUP(0)
+.code
+
+main PROC
+push OFFSET geometricArray ; Argument 2
+push count ; Argument 1
+CALL DisplayArray ; Displaying the array before ArrayFill
+
+push OFFSET geometricArray ; Argument 2
+push count ; Argument 1
+CALL ArrayFill ; generate geometric progression and filling that progression in the array
+
+push OFFSET geometricArray ; Argument 2
+push count ; Argument 1
+CALL DisplayArray ; Displaying the array after ArrayFill
+exit
+main ENDP
+
+;=============================
+; Needs two argument one Array offset and two the Array Count
+; First is a call by reference, the second is call by value
+;=============================
+ArrayFill PROC
+push ebp
+mov ebp, esp
+mov esi, [ebp+12] ; address offset
+mov ecx, [ebp+8] ; loop counter
+mov ebx, 0 ; index
+L2:
+mov eax, [esi + ebx]
+shl eax,1
+add ebx, TYPE geometricArray
+mov [esi + ebx], eax
+loop L2
+pop ebp
+ret
+ArrayFill ENDP
+
+;=============================
+; Needs two argument one Array offset and two the Array Count
+; First is a call by reference, the second is call by value
+;=============================
+DisplayArray PROC
+push ebp
+mov ebp, esp
+mov esi, [ebp+12] ; address offset
+mov ecx, [ebp+8] ; loop counter
+mov ebx, 0 ; index
+L1:
+movsx eax, WORD PTR [esi + ebx]
+add ebx, TYPE geometricArray
+CALL Crlf
+CALL WriteInt
+Loop L1
+pop ebp
+ret 8
+DisplayArray ENDP
+
+END main

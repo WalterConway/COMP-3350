@@ -1,0 +1,58 @@
+TITLE temp conversion
+INCLUDE Irvine32.inc
+.data
+INPUTMSG BYTE "ENTER THE TEMP TO CONVERT TO CELSIUS: ",0
+ANSOUTPUT BYTE "C = ",0
+SLANT BYTE "/9",0
+SPACE BYTE " ",0
+.code
+main proc
+mov edx, OFFSET INPUTMSG
+call WriteString
+call ReadInt
+push eax
+call TempConv
+exit
+main ENDP
+
+TempConv proc
+push ebp
+mov ebp, esp
+mov eax, [ebp+8]
+sub eax, 32
+imul eax, 5
+mov ebx, +9
+cdq
+idiv ebx
+push edx
+mov edx, OFFSET ANSOUTPUT
+call WriteString
+pop edx
+call writeint
+push edx
+mov edx, OFFSET SPACE
+call WriteString
+pop edx
+push eax
+mov eax, edx
+test eax,eax
+jns lbnotneg
+lbneg:
+neg eax
+lbnotneg:
+cmp eax, 0
+je lbfix
+call writedec
+pop eax
+push edx
+mov edx, OFFSET SLANT
+call WriteString
+pop edx
+jmp lbext
+lbfix:
+pop eax
+lbext:
+pop ebp
+ret 4
+TempConv ENDP
+END main

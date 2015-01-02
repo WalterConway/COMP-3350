@@ -1,0 +1,10 @@
+mov eax, 1h
+push eax
+mov ebx, eax
+shl eax, 4
+shl ebx, 2
+add eax, ebx
+pop ebx
+shl ebx, 1
+add eax, ebx
+inc eax

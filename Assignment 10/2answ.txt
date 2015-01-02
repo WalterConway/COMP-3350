@@ -1,0 +1,24 @@
+http://forum.codecall.net/topic/65299-assembly-intro-to-algorithms-with-string-functions-win32-nasm/
+
+enter 0, 0             ;; We won't need any local variables. 
+pusha                  ;; Save all the register values. 
+
+mov eax, dword [ebp+08] 
+mov ebx, eax                   ;; b= argument 1 
+
+mov eax, dword [ebp+12] 
+mov edx, eax                   ;; d= argument 2 
+
+.lp1: 
+  mov al, byte [edx]          ;; a= byte [d]      (note:  EDX (on 386 or later machines) can also be used for addressing) 
+  mov byte [ebx], al          ;; byte [b]= a 
+  
+  inc ebx                         ;; b= b + 1 
+  inc edx                         ;; d= d + 1 
+  
+  cmp al, 0                      ;; Subtract 0 from AL (don't store the result). 
+  jnz .lp1                         ;; If the result is not supposed to be 0, go to loop 1. 
+
+popa                             ;; Restore all the register values. 
+leave                            ;; Switch back to the previous stack frame. 
+ret 8     ;; Free 8 bytes after return.

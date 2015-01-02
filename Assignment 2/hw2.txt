@@ -1,0 +1,37 @@
+1.
+A. Name all eight 32-bit general-purpose registers.
+EAX
+EBX
+ECX
+EDX
+EBP
+ESP
+ESI
+EDI
+
+B. What is the general function of each of the registers?
+The general-purpose registers are primarily used for arithmetic and data movement, but some registers have specialized uses.
+EAX  - automatically used by multiplication and division instructions. It is often called the extended accumulator register.
+ECX - The CPU automatically uses it as a loop counter.
+ESP - Addresses data on the stack(a system memory structure). It is rarely used for ordinary arithmetic or data transfer. It is often called the extended stack pointer register.
+
+C. Which of these registers can be addressed in parts? 
+
+
+ 2.	What do the Sign Flag, Zero Flag, Auxiliary Carry Flag, and Parity Flag indicate when set?
+
+3.	What do the Overflow Flag and Carry Flag indicate when set? How do they differ?
+
+4.	Detail the process by which instructions and data are read from memory.
+
+5.	How is multitasking achieved?
+
+6.	Let us say your computer has only 100MB available for your process.  But your program needs 1GB of memory.  How does the computer make it possible to execute your program, as well as the other processes?  
+
+7.	What do you understand by Real-address mode, Protected mode, Multi-segment model, and Paging? How does Real-Address mode differ from Protected mode? What are the defining attributes of a Multi-segment model? Discuss in detail.
+
+8.	In a 32-bit computer what are the maximum memory that can be addressed in (a) real-addressed mode (b) protected mode?
+
+9.	What is the linear address corresponding to the following segment-offset: 07A2:0200?
+
+10.	Let us say your computer is running at 3.2 GHz.  You come to know that the Add instruction takes 4 clock periods in your computer.   Express the time taken by the Add instruction in nanoseconds.  

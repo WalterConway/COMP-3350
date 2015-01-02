@@ -1,0 +1,18 @@
+.data
+alpha DWORD 2
+beta DWORD 3
+gamma DWORD 5
+delta DWORD 1
+iota DWORD 4
+.code
+main proc
+mov eax, alpha
+add eax, beta
+push eax
+mov ebx, gamma
+sub ebx, delta
+mov eax, ebx
+mov edx,0
+div iota
+pop ebx
+mul ebx

@@ -1,0 +1,8 @@
+.data
+months BYTE ?
+.code
+main PROC
+mov eax, 0110110001001011b
+mov bh, ah
+and bh, 00001111b
+mov months, bh

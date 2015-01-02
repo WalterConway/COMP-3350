@@ -1,0 +1,37 @@
+TITLE blah
+INCLUDE Irvine32.inc
+.data
+Blu BYTE 12h, 14h, 34h, 23h, 65h, 78h, 56h, 99h, 20h, 05h
+Ye BYTE 41h, 25h, 23h, 45h, 12h, 0BCh, 0CDh, 0F1h, 10h, 09h
+gr BYTE 10 dup(0)
+.code
+main PROC
+clc
+mov ecx, 11
+mov edx, 10
+mov esi, OFFSET blu
+mov edi, OFFSET ye
+mov ebx, OFFSET gr
+
+L1:
+	mov al, [esi + edx]
+	mov ah, [edi + edx]
+	adc al, ah
+	mov byte ptr [ebx + edx],al
+	dec edx
+
+loop l1
+
+mov esi, offset gr
+mov ecx, 10
+mov ebx, type byte
+l2:
+	mov eax, [esi]	
+	call writehexb
+	call crlf
+	inc esi
+loop l2
+	
+exit
+main ENDP
+END main

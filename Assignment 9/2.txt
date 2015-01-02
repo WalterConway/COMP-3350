@@ -1,0 +1,73 @@
+TITLE BCD
+INCLUDE Irvine32.inc
+.data
+myAuburnID BYTE 09,02,12,43,01
+ALL1s BYTE 01h,11h,11h,11h,11h
+Result BYTE 5 DUP(0)
+MSG1 BYTE "RESULT ARRAY",0
+MSG2 BYTE "MYAUBURNID ARRAY",0
+.code
+main PROC
+mov edx, OFFSET MSG2
+CALL WriteString
+mov edx,0
+CALL CRLF
+push OFFSET myAuburnID ; Argument 2
+push 5 ; Argument 1
+CALL DisplayArray ; Displaying the array before ArrayFill
+CALL crlf
+
+mov edx, OFFSET MSG1
+CALL WriteString
+mov edx,0
+CALL CRLF
+
+push OFFSET Result ; Argument 2
+push 5 ; Argument 1
+CALL DisplayArray ; Displaying the array before ArrayFill
+
+CALL crlf
+mov ecx, 6
+mov edx, 5
+mov esi, OFFSET myAuburnID
+mov edi, OFFSET ALL1s
+mov ebx, OFFSET Result
+
+
+L1:
+	mov al, [esi + edx]
+	mov ah, [edi + edx]
+	add al, ah
+	daa
+	mov byte ptr [ebx + edx],al
+	dec edx
+loop l1
+
+CALL CRLF
+push OFFSET Result ; Argument 2
+push 5 ; Argument 1
+CALL DisplayArray ; Displaying the array before ArrayFill
+exit
+main ENDP
+
+;=============================
+; Needs two argument one Array offset and two the Array Count
+; First is a call by reference, the second is call by value
+;=============================
+DisplayArray PROC
+push ebp
+mov ebp, esp
+mov esi, [ebp+12] ; address offset
+mov ecx, [ebp+8] ; loop counter
+mov ebx, 0 ; index
+L1:
+movzx eax, BYTE PTR [esi + ebx]
+add ebx, TYPE BYTE
+CALL WriteDec
+CALL Crlf
+Loop L1
+pop ebp
+ret 8
+DisplayArray ENDP
+
+END main
